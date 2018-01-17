@@ -1,0 +1,3 @@
+sudo /usr/bin/docker stop powerpy_uwsgi
+sudo /usr/bin/docker rm powerpy_uwsgi
+

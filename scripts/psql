@@ -1,0 +1,5 @@
+sudo /usr/bin/docker run -it --rm \
+	--link powerpy_db:postgres \
+	-e PGPASSWORD=randomword \
+	postgres \
+	psql -h postgres -U powerpy

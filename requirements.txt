@@ -1,0 +1,4 @@
+beautifulsoup4==4.6.0
+bottle==0.12.13
+filelock==3.0.0
+

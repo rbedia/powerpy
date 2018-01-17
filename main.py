@@ -7,7 +7,7 @@ import system
 pjm_system_url = 'http://oasis.pjm.com/system.htm'
 system_file = '/tmp/system.htm'
 cache_time = 5 * 60
-app_root = '/home/dcat/powerpy'
+app_root = '/app'
 
 @route('/lmp')
 def lmp():

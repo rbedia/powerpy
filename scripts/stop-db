@@ -1,0 +1,3 @@
+sudo /usr/bin/docker stop powerpy_db
+sudo /usr/bin/docker rm powerpy_db
+

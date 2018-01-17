@@ -4,8 +4,9 @@ from bs4 import BeautifulSoup
 import filelock
 import os
 import re
+import shutil
 import time
-import urllib
+import urllib.request
 
 def download(url, write_file, cache_time):
     with filelock.FileLock(write_file + ".lock"):
@@ -20,7 +21,8 @@ def download(url, write_file, cache_time):
             download = True
 
         if download:
-            urllib.urlretrieve(url, write_file)
+            with urllib.request.urlopen(url) as response, open(write_file, 'wb') as out_file:
+                shutil.copyfileobj(response, out_file)
 
 def parse_lmp(system_file):
     with open(system_file) as fp:
