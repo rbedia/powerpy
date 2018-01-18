@@ -41,7 +41,7 @@ def parse_lmp(system_file):
             if name != "Bus Name":
                 record = {'name': name, 'minute_lmp': minute_lmp, 'hour_lmp': hour_lmp}
                 data.append(record)
-        return data
+        return {'lmp': data}
 
 def parse_agg_lmp(system_file):
     with open(system_file) as fp:
@@ -61,7 +61,7 @@ def parse_agg_lmp(system_file):
             if name != "Name":
                 record = {'name': name, 'type': agg_type, 'minute_lmp': minute_lmp, 'hour_lmp': hour_lmp}
                 data.append(record)
-        return data
+        return {'agg_lmp': data}
 
 def parse_transfer(system_file):
     with open(system_file) as fp:
@@ -82,7 +82,7 @@ def parse_transfer(system_file):
                 record = {'interface': interface, 'flow': flow, 'warning_level':
                         warning_level, 'transfer_level': transfer_level}
                 data.append(record)
-        return data
+        return {'transfer': data}
 
 def parse_load(system_file):
     with open(system_file) as fp:
@@ -100,7 +100,7 @@ def parse_load(system_file):
             if area != "Area":
                 record = {'area': area, 'load': load}
                 data.append(record)
-        return data
+        return {'load': data}
 
 def parse_limits(system_file):
     with open(system_file) as fp:

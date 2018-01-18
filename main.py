@@ -12,12 +12,12 @@ app_root = '/app'
 @route('/lmp')
 def lmp():
     system.download(pjm_system_url, system_file, cache_time)
-    return json.dumps(system.parse_lmp(system_file))
+    return system.parse_lmp(system_file)
 
 @route('/limits')
 def limits():
     system.download(pjm_system_url, system_file, cache_time)
-    return json.dumps(system.parse_limits(system_file))
+    return system.parse_limits(system_file)
 
 @route('/lines')
 def lines():
@@ -26,7 +26,7 @@ def lines():
 @route('/transfer')
 def transfer():
     system.download(pjm_system_url, system_file, cache_time)
-    return json.dumps(system.parse_transfer(system_file))
+    return system.parse_transfer(system_file)
 
 @route('/')
 def index():
