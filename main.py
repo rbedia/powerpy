@@ -8,6 +8,14 @@ pjm_system_url = 'http://oasis.pjm.com/system.htm'
 system_file = '/tmp/system.htm'
 cache_time = 5 * 60
 app_root = '/app'
+static_root = app_root + '/static'
+
+def powerpy_static(path):
+    return static_file(path, root=static_root)
+
+@route('/static/<path:path>')
+def static(path):
+    return powerpy_static(path)
 
 @route('/lmp')
 def lmp():
@@ -19,9 +27,9 @@ def limits():
     system.download(pjm_system_url, system_file, cache_time)
     return system.parse_limits(system_file)
 
-@route('/lines')
+@route('/powerlines.json')
 def lines():
-    return static_file('powerlines.json', root=app_root)
+    return powerpy_static('powerlines.json')
 
 @route('/transfer')
 def transfer():
@@ -30,7 +38,7 @@ def transfer():
 
 @route('/')
 def index():
-    return ''
+    return powerpy_static('index.html')
 
 application = bottle.default_app()
 

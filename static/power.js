@@ -23,8 +23,8 @@ var interfaceColor = "#238b45"
 
 var nodes = {};
 
-$.getJSON( "graph.json", function( graph ) {
-    $.getJSON( "/powerpy/lmp", function( lmp ) {
+$.getJSON( "/powerlines.json", function( graph ) {
+    $.getJSON( "/lmp", function( lmp ) {
         system = lmp.lmp;
         var buses = {};
         $.each( system, function( key, node ) {
@@ -67,7 +67,7 @@ $.getJSON( "graph.json", function( graph ) {
         $.each( graph['interfaces'], function( key, node ) {
             interfaces[node.name] = node;
         });
-        $.getJSON( "/powerpy/transfer", function( transfer ) {
+        $.getJSON( "/transfer", function( transfer ) {
             trans_limits = transfer.transfer;
             $.each( trans_limits, function( key, trans_limit ) {
                 var inter = interfaces[trans_limit['interface']];
@@ -191,7 +191,7 @@ $.getJSON( "graph.json", function( graph ) {
 });
 
 /*
-$.getJSON( "/powerpy/limits", function( data ) {
+$.getJSON( "/limits", function( data ) {
     console.log(data.limits);
     var html = "<pre>" + data.limits + "</pre>";
 
