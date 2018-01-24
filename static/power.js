@@ -19,7 +19,10 @@ var subsGroup = L.featureGroup().addTo(map);
 var linesGroup = L.featureGroup().addTo(map);
 var interfacesGroup = L.featureGroup().addTo(map);
 
-var interfaceColor = "#238b45"
+var interfaceColorRange = ['#fef0d9','#fdcc8a','#fc8d59','#e34a33','#b30000'];
+var interfaceColor = d3.scale.quantize()
+	.domain([0, 100])
+	.range(interfaceColorRange)
 
 var nodes = {};
 
@@ -72,13 +75,13 @@ $.getJSON( "/powerlines.json", function( graph ) {
             $.each( trans_limits, function( key, trans_limit ) {
                 var inter = interfaces[trans_limit['interface']];
                 if (inter) {
+                    warn_pct = trans_limit.flow / trans_limit.warning_level * 100;
+                    trans_pct = trans_limit.flow / trans_limit.transfer_level * 100;
                     var line = L.polyline(inter.path, {
-                        color: interfaceColor,
+                        color: interfaceColor(warn_pct),
                         weight: 5,
                         dashArray: "6, 8",
                     }).addTo(interfacesGroup);
-                    warn_pct = trans_limit.flow / trans_limit.warning_level * 100;
-                    trans_pct = trans_limit.flow / trans_limit.transfer_level * 100;
                     line.bindPopup("Interface: " + trans_limit['interface'] + "<br>" +
                         "Flow: " + trans_limit.flow + " MW<br>" +
                         "Warning Level: " + trans_limit.warning_level +
@@ -154,6 +157,17 @@ $.getJSON( "/powerlines.json", function( graph ) {
             });
         });
 
+        var interfacesLegendElements = [];
+        $.each(interfaceColorRange, function( key, color ) {
+            range = interfaceColor.invertExtent(color);
+            interfacesLegendElements.push({
+                label: range[0] + '% - ' + range[1] + '%',
+                html: '',
+                style: osmPowerLegendStyle(color)
+            });
+        });
+
+
         var htmlLegend1 = L.control.htmllegend({
             position: 'topright',
             legends: [{
@@ -169,18 +183,9 @@ $.getJSON( "/powerlines.json", function( graph ) {
                 layer: subsGroup,
                 elements: []
             }, {
-                name: 'Interfaces',
+                name: 'Transfer Interfaces',
                 layer: interfacesGroup,
-                elements: [{
-                    label: 'Transfer interface',
-                    html: '',
-                    style: {
-                        "background-color": interfaceColor,
-                        "width": "10px",
-                        "height": "5px",
-                        "border": "1px solid #333"
-                    }
-                }]
+                elements: interfacesLegendElements
             }],
             collapsedOnInit: true
         });
