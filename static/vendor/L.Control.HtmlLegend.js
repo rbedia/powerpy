@@ -103,7 +103,7 @@ L.Control.HtmlLegend = L.Control.extend({
         if (typeof layer.setOpacity === 'function') {
             layer.setOpacity(opacity);
         } else if (typeof layer.setStyle === 'function') {
-            layer.setStyle({opacity: opacity});
+            layer.setStyle({opacity: opacity, fillOpacity: opacity});
         }
     },
 
