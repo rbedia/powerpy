@@ -1,11 +1,4 @@
-data_dir=/home/dcat/powerpy/data/db
-sudo setfacl -m u:26:-wx ${data_dir}
 sudo /usr/bin/docker run -d --name powerpy_uwsgi \
-	-e POSTGRESQL_USER=powerpy \
-	-e POSTGRESQL_PASSWORD=randomword \
-	-e POSTGRESQL_DATABASE=powerpy \
-	-e POSTGRESQL_ADMIN_PASSWORD=randomword \
 	-p 8111:80 \
-	-v ${data_dir}:/var/lib/pgsql/data:Z \
 	powerpy:latest
 
