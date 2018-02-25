@@ -9,7 +9,7 @@ var osmMap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var powerMap = L.tileLayer('http://aqua.trillinux.org:8080/hot/{z}/{x}/{y}.png', {
+var powerMap = L.tileLayer('http://power.doxu.org/osm_tiles/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
