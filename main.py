@@ -2,8 +2,10 @@ import bottle
 from bottle import route, static_file
 import json
 
+import query
 import system
 
+DEBUG = False
 pjm_system_url = 'http://oasis.pjm.com/system.htm'
 system_file = '/tmp/system.htm'
 cache_time = 5 * 60
@@ -19,13 +21,11 @@ def static(path):
 
 @route('/lmp')
 def lmp():
-    system.download(pjm_system_url, system_file, cache_time)
-    return system.parse_lmp(system_file)
+    return {'lmp': query.most_recent()['lmp']}
 
 @route('/limits')
 def limits():
-    system.download(pjm_system_url, system_file, cache_time)
-    return system.parse_limits(system_file)
+    return {'limits': query.most_recent()['limits']}
 
 @route('/powerlines.json')
 def lines():
@@ -33,12 +33,14 @@ def lines():
 
 @route('/transfer')
 def transfer():
-    system.download(pjm_system_url, system_file, cache_time)
-    return system.parse_transfer(system_file)
+    return {'transfer': query.most_recent()['transfer']}
 
 @route('/')
 def index():
     return powerpy_static('index.html')
+
+if DEBUG:
+    bottle.debug(True)
 
 application = bottle.default_app()
 

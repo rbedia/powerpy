@@ -1,4 +1,5 @@
-sudo /usr/bin/docker run -d --link powerpy_db:db \
+sudo /usr/bin/docker run -d \
+    --link powerpy_db:db \
 	-e POSTGRESQL_USER=powerpy \
 	-e POSTGRESQL_PASSWORD=randomword \
 	-e POSTGRESQL_DATABASE=powerpy \

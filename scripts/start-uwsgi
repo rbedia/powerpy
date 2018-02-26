@@ -1,4 +1,9 @@
-sudo /usr/bin/docker run -d --name powerpy_uwsgi \
+sudo /usr/bin/docker run -d \
+    --name powerpy_uwsgi \
+    --link powerpy_db:db \
+	-e POSTGRESQL_USER=powerpy \
+	-e POSTGRESQL_PASSWORD=randomword \
+	-e POSTGRESQL_DATABASE=powerpy \
 	-p 8111:80 \
 	powerpy:latest
 
