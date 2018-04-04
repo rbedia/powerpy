@@ -22,13 +22,38 @@ var interfacesGroup = L.featureGroup().addTo(map);
 var interfaceColorRange = ['#fef0d9','#fdcc8a','#fc8d59','#e34a33','#b30000'];
 var interfaceColor = d3.scale.quantize()
 	.domain([0, 100])
-	.range(interfaceColorRange)
+	.range(interfaceColorRange);
 
 var nodes = {};
 
+L.Control.Text = L.Control.extend({
+    onAdd: function(map) {
+        var div = L.DomUtil.create('div', 'control-text');
+        div.textContent = this.options.text;
+
+
+        return div;
+    },
+
+    onRemove: function(map) {
+    }
+});
+
+L.control.text = function(opts) {
+    return new L.Control.Text(opts);
+}
+
 $.getJSON( "/powerlines.json", function( graph ) {
-    $.getJSON( "/lmp", function( lmp ) {
-        system = lmp.lmp;
+
+    $.getJSON( "/pjm", function( data ) {
+        var pjm = data.pjm;
+
+        L.control.text({
+            position: 'bottomright',
+            text: 'Last updated: ' + pjm.last_updated
+        }).addTo(map);
+
+        var system = pjm.lmp;
         var buses = {};
         $.each( system, function( key, node ) {
             buses[node.name] = node;
@@ -47,11 +72,11 @@ $.getJSON( "/powerlines.json", function( graph ) {
                 .range(["#1a9641", "#a6d96a", "#ffffbf", "#fdae61", "#d7191c"]);
         }
 
-        $.each( graph['nodes'], function( key, node ) {
+        $.each( graph.nodes, function( key, node ) {
             nodes[node.index] = node;
         });
 
-        $.each( graph['links'], function( key, link ) {
+        $.each( graph.links, function( key, link ) {
             var source = nodes[link.source];
             var target = nodes[link.target];
             if (source.lat && source.lon && target.lat && target.lon) {
@@ -67,32 +92,31 @@ $.getJSON( "/powerlines.json", function( graph ) {
         });
 
         var interfaces = {};
-        $.each( graph['interfaces'], function( key, node ) {
+        $.each( graph.interfaces, function( key, node ) {
             interfaces[node.name] = node;
         });
-        $.getJSON( "/transfer", function( transfer ) {
-            trans_limits = transfer.transfer;
-            $.each( trans_limits, function( key, trans_limit ) {
-                var inter = interfaces[trans_limit['interface']];
-                if (inter) {
-                    warn_pct = trans_limit.flow / trans_limit.warning_level * 100;
-                    trans_pct = trans_limit.flow / trans_limit.transfer_level * 100;
-                    var line = L.polyline(inter.path, {
-                        color: interfaceColor(warn_pct),
-                        weight: 5,
-                        dashArray: "6, 8",
-                    }).addTo(interfacesGroup);
-                    line.bindPopup("Interface: " + trans_limit['interface'] + "<br>" +
-                        "Flow: " + trans_limit.flow + " MW<br>" +
-                        "Warning Level: " + trans_limit.warning_level +
-                        " MW (" + Math.round(warn_pct) + "%)<br>" +
-                        "Transfer Limit: " + trans_limit.transfer_level +
-                        " MW (" + Math.round(trans_pct) + "%)");
-                }
-            });
+
+        trans_limits = pjm.transfer;
+        $.each( trans_limits, function( key, trans_limit ) {
+            var inter = interfaces[trans_limit['interface']];
+            if (inter) {
+                warn_pct = trans_limit.flow / trans_limit.warning_level * 100;
+                trans_pct = trans_limit.flow / trans_limit.transfer_level * 100;
+                var line = L.polyline(inter.path, {
+                    color: interfaceColor(warn_pct),
+                    weight: 5,
+                    dashArray: "6, 8",
+                }).addTo(interfacesGroup);
+                line.bindPopup("Interface: " + trans_limit['interface'] + "<br>" +
+                    "Flow: " + trans_limit.flow + " MW<br>" +
+                    "Warning Level: " + trans_limit.warning_level +
+                    " MW (" + Math.round(warn_pct) + "%)<br>" +
+                    "Transfer Limit: " + trans_limit.transfer_level +
+                    " MW (" + Math.round(trans_pct) + "%)");
+            }
         });
 
-        $.each( graph['nodes'], function( key, node ) {
+        $.each( graph.nodes, function( key, node ) {
             if (node.lat && node.lon) {
                 var bus = buses[node.name.toUpperCase()];
                 if (!bus) {

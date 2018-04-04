@@ -27,6 +27,10 @@ def lmp():
 def limits():
     return {'limits': query.most_recent()['limits']}
 
+@route('/pjm')
+def pjm():
+    return {'pjm': query.most_recent()}
+
 @route('/powerlines.json')
 def lines():
     return powerpy_static('powerlines.json')
