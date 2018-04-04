@@ -12,7 +12,7 @@ import schedule
 from pjm import LMPLoader
 
 
-last_updated_format = '%a %b %d %H:%M:%S EST %Y'
+last_updated_format = '%a %b %d %H:%M:%S EDT %Y'
 
 def save_lmp():
     print(datetime.now(), "Saving LMP data")
