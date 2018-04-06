@@ -2,8 +2,10 @@
 
 from datetime import datetime
 import json
+import logging
 import os
 import time
+import traceback
 
 import psycopg2
 from psycopg2.extras import Json
@@ -15,21 +17,24 @@ from pjm import LMPLoader
 last_updated_format = '%a %b %d %H:%M:%S EDT %Y'
 
 def save_lmp():
-    print(datetime.now(), "Saving LMP data")
-    with psycopg2.connect("dbname='%s' user='%s' host='db' password='%s'" % (
-            os.environ['POSTGRESQL_DATABASE'],
-            os.environ['POSTGRESQL_USER'],
-            os.environ['POSTGRESQL_PASSWORD'])) as conn:
+    try:
+        print(datetime.now(), "Saving LMP data")
+        with psycopg2.connect("dbname='%s' user='%s' host='db' password='%s'" % (
+                os.environ['POSTGRESQL_DATABASE'],
+                os.environ['POSTGRESQL_USER'],
+                os.environ['POSTGRESQL_PASSWORD'])) as conn:
 
-        with conn.cursor() as cur:
-            pjm_url = 'http://oasis.pjm.com/system.htm'
-            system_file = '/tmp/system2.htm'
-            cache_time = 5 * 60
-            loader = LMPLoader(pjm_url, system_file, cache_time)
-            data = loader.parse()
-            last_updated = datetime.strptime(data['last_updated'], last_updated_format)
-            cur.execute("INSERT INTO lmp(entry_date, doc) VALUES(%s, %s);",
-                    (last_updated, Json(data)))
+            with conn.cursor() as cur:
+                pjm_url = 'http://oasis.pjm.com/system.htm'
+                system_file = '/tmp/system2.htm'
+                cache_time = 5 * 60
+                loader = LMPLoader(pjm_url, system_file, cache_time)
+                data = loader.parse()
+                last_updated = datetime.strptime(data['last_updated'], last_updated_format)
+                cur.execute("INSERT INTO lmp(entry_date, doc) VALUES(%s, %s);",
+                        (last_updated, Json(data)))
+    except Exception as e:
+        logging.error(traceback.format_exc())
 
 
 schedule.every(5).minutes.do(save_lmp)
