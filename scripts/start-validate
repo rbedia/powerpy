@@ -1,0 +1,6 @@
+sudo /usr/bin/docker run \
+    --link powerpy_db:db \
+	-e POSTGRESQL_USER=powerpy \
+	-e POSTGRESQL_PASSWORD=randomword \
+	-e POSTGRESQL_DATABASE=powerpy \
+    powerpy:latest /app/json-schema/validate.py

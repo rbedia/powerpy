@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {
+        "interfaces": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "path": { "$ref": "#/definitions/int-path" }
+                },
+                "required": ["name", "path"]
+            },
+            "mergeStrategy": "append"
+        },
+        "int-path": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": [
+                    { "type": "number" },
+                    { "type": "number" }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+            }
+        },
+        "nodes": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/node" },
+            "mergeStrategy": "append"
+        },
+        "node": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "index": { "type": "number" },
+                "lat": { "type": "number" },
+                "lon": { "type": "number" },
+                "state": { "type": "string" },
+                "pjm": { "type": "string" },
+                "ref": { "type": "string" }
+            },
+            "additionalProperties": false,
+            "required": ["name", "lat", "lon", "index"]
+        },
+        "links": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/link" },
+            "mergeStrategy": "append"
+        },
+        "link": {
+            "type": "object",
+            "properties": {
+                "source": { "type": "number" },
+                "target": { "type": "number" },
+                "voltage": { "type": "number" },
+                "length": { "type": "number" },
+                "ref": { "type": ["number", "string"] }
+            },
+            "additionalProperties": false,
+            "required": ["source", "target", "voltage"]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "interfaces": { "$ref": "#/definitions/interfaces" },
+        "nodes": { "$ref": "#/definitions/nodes" },
+        "links": { "$ref": "#/definitions/links" }
+    },
+    "required": ["interfaces", "nodes", "links"]
+}
+

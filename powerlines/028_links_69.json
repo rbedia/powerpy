@@ -1,0 +1,16 @@
+{
+  "links": [
+    {"source": 483, "target": 484, "voltage": 69,  "length": 4},
+    {"source": 483, "target": 489, "voltage": 69,  "length": 5},
+    {"source": 484, "target": 485, "voltage": 69,  "length": 2},
+    {"source": 485, "target": 486, "voltage": 69,  "length": 2},
+    {"source": 486, "target": 487, "voltage": 69,  "length": 3},
+    {"source": 487, "target": 488, "voltage": 69,  "length": 2},
+    {"source": 488, "target": 489, "voltage": 69,  "length": 2},
+    {"source": 488, "target": 490, "voltage": 69,  "length": 2},
+    {"source": 490, "target": 491, "voltage": 69,  "length": 2},
+    {"source": 491, "target": 492, "voltage": 69,  "length": 1},
+    {"source": 492, "target": 493, "voltage": 69,  "length": 3}
+  ]
+}
+
