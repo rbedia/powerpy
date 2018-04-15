@@ -1011,7 +1011,8 @@
     {"name": "Biers Run", "state": "OH", "lat": 39.39677125, "lon": -83.10037905, "index": 984},
     {"name": "Conesville", "state": "OH", "lat": 40.18362915, "lon": -81.8785058, "index": 985},
     {"name": "Corridor", "state": "OH", "lat": 40.1241179, "lon": -82.8450834, "index": 986},
-    {"name": "Jug Street", "state": "OH", "lat": 40.0956091, "lon": -82.748119, "index": 987}
+    {"name": "Jug Street", "state": "OH", "lat": 40.0956091, "lon": -82.748119, "index": 987},
+    {"name": "Hillcrest", "state": "OH", "lat": 39.07667035, "lon": -83.9079088, "index": 988}
   ],
   "links": [
     {"source": 0,  "target": 1,  "voltage": 765,  "length": 56},
@@ -1642,6 +1643,7 @@
     {"source": 433, "target": 435, "voltage": 345,  "length": 32},
     {"source": 434, "target": 968, "voltage": 345,  "length": 54},
     {"source": 434, "target": 983, "voltage": 345,  "length": 70},
+    {"source": 434, "target": 988, "voltage": 345,  "length": 33},
     {"source": 435, "target": 973, "voltage": 345,  "length": 46},
     {"source": 436, "target": 449, "voltage": 345,  "length": 42},
     {"source": 436, "target": 450, "voltage": 345,  "length": 58},
@@ -2284,6 +2286,7 @@
     {"source": 970, "target": 971, "voltage": 345,  "length": 2},
     {"source": 971, "target": 972, "voltage": 345,  "length": 14},
     {"source": 972, "target": 973, "voltage": 345,  "length": 12},
+    {"source": 972, "target": 988, "voltage": 345,  "length": 23},
     {"source": 974, "target": 975, "voltage": 345,  "length": 17},
     {"source": 974, "target": 981, "voltage": 345,  "length": 13},
     {"source": 974, "target": 982, "voltage": 345,  "length": 13},
