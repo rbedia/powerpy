@@ -989,7 +989,8 @@
     {"name": "Conesville", "state": "OH", "lat": 40.18362915, "lon": -81.8785058, "index": 985},
     {"name": "Corridor", "state": "OH", "lat": 40.1241179, "lon": -82.8450834, "index": 986},
     {"name": "Jug Street", "state": "OH", "lat": 40.0956091, "lon": -82.748119, "index": 987},
-    {"name": "Hillcrest", "state": "OH", "lat": 39.07667035, "lon": -83.9079088, "index": 988}
+    {"name": "Hillcrest", "state": "OH", "lat": 39.07667035, "lon": -83.9079088, "index": 988},
+    {"name": "Killen", "state": "OH", "lat": 38.6938299, "lon": -83.47813185, "index": 989}
   ]
 }
 
