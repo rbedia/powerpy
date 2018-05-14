@@ -3,12 +3,8 @@ from bottle import route, static_file
 import json
 
 import query
-import system
 
 DEBUG = False
-pjm_system_url = 'http://oasis.pjm.com/system.htm'
-system_file = '/tmp/system.htm'
-cache_time = 5 * 60
 app_root = '/app'
 static_root = app_root + '/static'
 
