@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using clean-css v4.1.6.
+ * Original file: /npm/leaflet-editinosm@0.2.3/Leaflet.EditInOSM.css
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+.leaflet-control-edit-in-osm,.leaflet-control-edit-in-osm-simple{background:none repeat scroll 0 0 #f8f8f9;border:1px solid #888;border-radius:5px 5px 5px 5px;box-shadow:0 0 8px rgba(0,0,0,.4)}.leaflet-control-edit-in-osm .leaflet-control-edit-in-osm-toggle{background-position:50% 50%;background-repeat:no-repeat;height:36px;width:36px;display:block}.leaflet-control-edit-in-osm .leaflet-control-edit-in-osm-toggle{background-image:url(./edit-in-osm.png)}.leaflet-control-edit-in-osm .osm-editor+.osm-editor{border-left:1px solid #000}.leaflet-control-edit-in-osm a.osm-editor,.leaflet-control-edit-in-osm-simple a.osm-editor{display:none;height:36px;min-width:36px;text-align:center;line-height:36px;color:#333;padding:0 5px;text-decoration:none;font-family:sans-serif}.leaflet-control-edit-in-osm-simple a.osm-editor,.leaflet-control-edit-in-osm:hover a.osm-editor{display:inline-block}a.osm-editor:hover{box-shadow:0 0 2px 0 #000 inset}.leaflet-control-edit-in-osm:hover .leaflet-control-edit-in-osm-toggle{display:none}.leaflet-control-edit-hidden{display:none}
+/*# sourceMappingURL=/sm/76e8a3c24b540ef87e5abb1105a0c04d54132782bf14a70891fe49f5d5fc7437.map */
