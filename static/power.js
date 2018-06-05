@@ -40,8 +40,8 @@ function lmpColorGen( minLMP, maxLMP ) {
 }
 
 function addPowerline( key, link ) {
-    var source = nodes[link.source];
-    var target = nodes[link.target];
+    var source = this.nodes[link.source];
+    var target = this.nodes[link.target];
     if (source.lat && source.lon && target.lat && target.lon) {
         var path = [[source.lat, source.lon], [target.lat, target.lon]];
         var line = L.polyline(path, {color: voltColor(link.voltage)}).addTo(linesGroup);
@@ -55,7 +55,7 @@ function addPowerline( key, link ) {
 }
 
 function addTransferInterface( key, trans_limit ) {
-    var inter = interfaces[trans_limit['interface']];
+    var inter = this.interfaces[trans_limit['interface']];
     if (inter) {
         warn_pct = trans_limit.flow / trans_limit.warning_level * 100;
         trans_pct = trans_limit.flow / trans_limit.transfer_level * 100;
@@ -75,15 +75,15 @@ function addTransferInterface( key, trans_limit ) {
 
 function addBus( key, node ) {
     if (node.lat && node.lon) {
-        var bus = buses[node.name.toUpperCase()];
+        var bus = this.buses[node.name.toUpperCase()];
         if (!bus) {
-            bus = buses[node.pjm];
+            bus = this.buses[node.pjm];
         }
         var circleColor = "#fff";
         var lmpText = "";
         var circleRadius = 5;
         if (bus) {
-            circleColor = lmpColor(bus.minute_lmp);
+            circleColor = this.lmpColor(bus.minute_lmp);
             lmpText = "<br>5 Minute LMP: " + bus.minute_lmp;
             circleRadius = 7;
         }
@@ -191,11 +191,6 @@ function createLastUpdatedControl( pjm ) {
     });
 }
 
-var nodes = {};
-var buses = {};
-var interfaces = {};
-var lmpColor;
-
 $.when(
     $.getJSON( "/powerlines.json" ),
     $.getJSON( "/pjm" ) 
@@ -205,18 +200,18 @@ $.when(
 
     map.addControl( createLastUpdatedControl( pjm ) );
 
-    buses = pjm.lmp.reduce( mapByName, {} );
-    nodes = graph.nodes.reduce( mapByIndex, {} );
-    interfaces = graph.interfaces.reduce( mapByName, {} );
+    var buses = pjm.lmp.reduce( mapByName, {} );
+    var nodes = graph.nodes.reduce( mapByIndex, {} );
+    var interfaces = graph.interfaces.reduce( mapByName, {} );
 
     var busesArr = Object.keys(buses).map(function (key) { return buses[key]; });
     var minLMP = d3.min( busesArr, function(d) { return parseFloat(d.minute_lmp); });
     var maxLMP = d3.max( busesArr, function(d) { return parseFloat(d.minute_lmp); });
-    lmpColor = lmpColorGen( minLMP, maxLMP );
+    var lmpColor = lmpColorGen( minLMP, maxLMP );
 
-    $.each( graph.links, addPowerline );
-    $.each( pjm.transfer, addTransferInterface );
-    $.each( graph.nodes, addBus );
+    $.each( graph.links, addPowerline.bind({nodes: nodes}) );
+    $.each( pjm.transfer, addTransferInterface.bind({interfaces: interfaces}) );
+    $.each( graph.nodes, addBus.bind({buses: buses, lmpColor: lmpColor}) );
 
     map.addControl(createLegend());
 });
