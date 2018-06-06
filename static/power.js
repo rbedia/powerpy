@@ -112,7 +112,6 @@ function createLegend() {
         };
     };
 
-    var osmPowerLegendElements = [];
     var voltageToColor = [
         ["765", "#66c2a5"],
         ["500", "#ffd92f"],
@@ -122,35 +121,33 @@ function createLegend() {
         ["69", "#fc8d62"],
         ["34.5", "#e5c494"]
         ];
-    $.each(voltageToColor, function( key, v2c ) {
-        osmPowerLegendElements.push({
+    var osmPowerLegendElements = voltageToColor.map( function( v2c ) {
+        return {
             label: v2c[0] + ' kV',
             html: '',
             style: osmPowerLegendStyle(v2c[1])
-        });
+        };
     });
 
-    var linesLegendElements = [];
-    $.each(voltColor.domain(), function( key, v ) {
-        linesLegendElements.push({
-            label: v + ' kV',
+    var linesLegendElements = voltColor.domain().map( function( voltage ) {
+        return {
+            label: voltage + ' kV',
             html: '',
-            style: osmPowerLegendStyle(voltColor(v))
-        });
+            style: osmPowerLegendStyle(voltColor(voltage))
+        };
     });
 
-    var interfacesLegendElements = [];
-    $.each(interfaceColorRange, function( key, color ) {
+    var interfacesLegendElements = interfaceColorRange.map( function( color ) {
         range = interfaceColor.invertExtent(color);
-        interfacesLegendElements.push({
+        return {
             label: range[0] + '% - ' + range[1] + '%',
             html: '',
             style: osmPowerLegendStyle(color)
-        });
+        };
     });
 
 
-    var htmlLegend1 = L.control.htmllegend({
+    return L.control.htmllegend({
         position: 'topright',
         legends: [{
             name: 'OSM Power',
@@ -171,16 +168,10 @@ function createLegend() {
         }],
         collapsedOnInit: true
     });
-    return htmlLegend1;
 }
 
-function mapByName( map, obj ) {
-    map[obj.name] = obj;
-    return map;
-}
-
-function mapByIndex( map, obj ) {
-    map[obj.index] = obj;
+function mapBy( map, obj ) {
+    map[obj[this.key]] = obj;
     return map;
 }
 
@@ -200,13 +191,13 @@ $.when(
 
     map.addControl( createLastUpdatedControl( pjm ) );
 
-    var buses = pjm.lmp.reduce( mapByName, {} );
-    var nodes = graph.nodes.reduce( mapByIndex, {} );
-    var interfaces = graph.interfaces.reduce( mapByName, {} );
+    var buses = pjm.lmp.reduce( mapBy.bind({key: 'name'}), {} );
+    var nodes = graph.nodes.reduce( mapBy.bind({key: 'index'}), {} );
+    var interfaces = graph.interfaces.reduce( mapBy.bind({key: 'name'}), {} );
 
-    var busesArr = Object.keys(buses).map(function (key) { return buses[key]; });
-    var minLMP = d3.min( busesArr, function(d) { return parseFloat(d.minute_lmp); });
-    var maxLMP = d3.max( busesArr, function(d) { return parseFloat(d.minute_lmp); });
+    var lmps = Object.keys(buses).map(function (key) { return parseFloat(buses[key].minute_lmp); });
+    var minLMP = d3.min( lmps );
+    var maxLMP = d3.max( lmps );
     var lmpColor = lmpColorGen( minLMP, maxLMP );
 
     $.each( graph.links, addPowerline.bind({nodes: nodes}) );
