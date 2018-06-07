@@ -25,6 +25,8 @@ var interfaceColor = d3.scale.quantize()
 	.domain([0, 100])
 	.range(interfaceColorRange);
 
+var defaultSubColor = "#feff81";
+
 function lmpColorGen( minLMP, maxLMP ) {
     var lmpColor;
     if (minLMP > 0) {
@@ -79,7 +81,7 @@ function addBus( key, node ) {
         if (!bus) {
             bus = this.buses[node.pjm];
         }
-        var circleColor = "#fff";
+        var circleColor = defaultSubColor;
         var lmpText = "";
         var circleRadius = 5;
         if (bus) {
@@ -102,7 +104,7 @@ function addBus( key, node ) {
     }
 }
 
-function createLegend() {
+function createLegend( lmpColor ) {
     var osmPowerLegendStyle = function(color) {
         return {
             "background-color": color,
@@ -137,6 +139,20 @@ function createLegend() {
         };
     });
 
+    var subsLegendElements = lmpColor.range().map( function( color ) {
+        range = lmpColor.invertExtent(color);
+        return {
+            label: range[0].toFixed(1) + ' - ' + range[1].toFixed(),
+            html: '',
+            style: osmPowerLegendStyle(color)
+        };
+    });
+    subsLegendElements.push({
+        label: 'No data',
+        html: '',
+        style: osmPowerLegendStyle(defaultSubColor)
+    });
+
     var interfacesLegendElements = interfaceColorRange.map( function( color ) {
         range = interfaceColor.invertExtent(color);
         return {
@@ -160,7 +176,7 @@ function createLegend() {
         }, {
             name: 'Substations',
             layer: subsGroup,
-            elements: []
+            elements: subsLegendElements
         }, {
             name: 'Transfer Interfaces',
             layer: interfacesGroup,
@@ -204,7 +220,7 @@ $.when(
     $.each( pjm.transfer, addTransferInterface.bind({interfaces: interfaces}) );
     $.each( graph.nodes, addBus.bind({buses: buses, lmpColor: lmpColor}) );
 
-    map.addControl(createLegend());
+    map.addControl(createLegend(lmpColor));
 });
 
 /*
