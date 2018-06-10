@@ -993,7 +993,10 @@
     {"name": "Killen", "state": "OH", "lat": 38.6938299, "lon": -83.47813185, "index": 989},
     {"name": "South Bloomington", "state": "IL", "lat": 40.46177405, "lon": -88.98608275, "index": 990},
     {"name": "Blandford", "state": "GA", "lat": 32.2744151, "lon": -81.2822299, "index": 991},
-    {"name": "Putnam", "state": "FL", "lat": 29.6279635, "lon": -81.5813391, "index": 992}
+    {"name": "Putnam", "state": "FL", "lat": 29.6279635, "lon": -81.5813391, "index": 992},
+    {"name": "Heard County", "state": "GA", "lat": 33.3589437, "lon": -84.99429325, "index": 993},
+    {"name": "Tenaska Georgia", "state": "GA", "lat": 33.3516367, "lon": -84.99802555, "index": 994},
+    {"name": "Dresden", "state": "GA", "lat": 33.35148775, "lon": -84.90587155, "index": 995}
   ]
 }
 
