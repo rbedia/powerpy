@@ -116,30 +116,54 @@ function createLastUpdatedControl( pjm ) {
     });
 }
 
-$.when(
-    $.getJSON( "/powerlines.json" ),
-    $.getJSON( "/pjm" ) 
-).done( function( powerlinesResult, pjmResult ) {
-    var graph = powerlinesResult[0];
-    var pjm = pjmResult[0].pjm;
+var lastUpdatedControl;
+var legendControl;
 
-    map.addControl( createLastUpdatedControl( pjm ) );
+function loadData() {
+    $.when(
+        $.getJSON( "/powerlines.json" ),
+        $.getJSON( "/pjm" ) 
+    ).done( function( powerlinesResult, pjmResult ) {
+        var graph = powerlinesResult[0];
+        var pjm = pjmResult[0].pjm;
 
-    var buses = pjm.lmp.reduce( mapBy.bind({key: 'name'}), {} );
-    var nodes = graph.nodes.reduce( mapBy.bind({key: 'index'}), {} );
-    var interfaces = graph.interfaces.reduce( mapBy.bind({key: 'name'}), {} );
+        linesGroup.clearLayers();
+        subsGroup.clearLayers();
+        interfacesGroup.clearLayers();
 
-    var lmps = Object.keys(buses).map(function (key) { return parseFloat(buses[key].minute_lmp); });
-    var minLMP = d3.min( lmps );
-    var maxLMP = d3.max( lmps );
-    var lmpColor = lmpColorGen( minLMP, maxLMP );
+        if ( lastUpdatedControl ) {
+            map.removeControl( lastUpdatedControl );
+        }
+        if ( legendControl ) {
+            map.removeControl( legendControl );
+        }
 
-    $.each( graph.links, addPowerline.bind({nodes: nodes}) );
-    $.each( pjm.transfer, addTransferInterface.bind({interfaces: interfaces}) );
-    $.each( graph.nodes, addBus.bind({buses: buses, lmpColor: lmpColor}) );
+        lastUpdatedControl = createLastUpdatedControl( pjm );
+        map.addControl( lastUpdatedControl );
 
-    map.addControl(createLegend(lmpColor));
-});
+        var buses = pjm.lmp.reduce( mapBy.bind({key: 'name'}), {} );
+        var nodes = graph.nodes.reduce( mapBy.bind({key: 'index'}), {} );
+        var interfaces = graph.interfaces.reduce( mapBy.bind({key: 'name'}), {} );
+
+        var lmps = Object.keys(buses).map(function (key) { return parseFloat(buses[key].minute_lmp); });
+        var minLMP = d3.min( lmps );
+        var maxLMP = d3.max( lmps );
+        var lmpColor = lmpColorGen( minLMP, maxLMP );
+
+        $.each( graph.links, addPowerline.bind({nodes: nodes}) );
+        $.each( pjm.transfer, addTransferInterface.bind({interfaces: interfaces}) );
+        $.each( graph.nodes, addBus.bind({buses: buses, lmpColor: lmpColor}) );
+
+        legendControl = createLegend( lmpColor );
+        map.addControl( legendControl );
+
+    });
+}
+
+loadData();
+
+var updateIntervalSec = 5 * 60;
+setInterval(loadData, updateIntervalSec * 1000 );
 
 /*
 $.getJSON( "/limits", function( data ) {
