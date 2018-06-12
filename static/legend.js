@@ -34,9 +34,17 @@ function createLegend( lmpColor ) {
     });
 
     var subsLegendElements = lmpColor.range().map( function( color ) {
-        range = lmpColor.invertExtent(color);
+        var range = lmpColor.invertExtent(color);
+        var label;
+        if ( typeof range[0] == 'undefined' ) {
+            label = '<$' + range[1];
+        } else if ( typeof range[1] == 'undefined' ) {
+            label = '>$' + range[0];
+        } else {
+            label = '$' + range[0] + ' - ' + range[1];
+        }
         return {
-            label: range[0].toFixed(1) + ' - ' + range[1].toFixed(),
+            label: label,
             html: '',
             style: osmPowerLegendStyle(color)
         };

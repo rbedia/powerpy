@@ -25,21 +25,19 @@ var interfaceColor = d3.scale.quantize()
 	.domain([0, 100])
 	.range(interfaceColorRange);
 
-var defaultSubColor = "#feff81";
+var defaultSubColor = "#feffd1";
 
-function lmpColorGen( minLMP, maxLMP ) {
-    var lmpColor;
-    if (minLMP > 0) {
-        lmpColor = d3.scale.quantize()
-            .domain([minLMP, maxLMP])
-            .range(["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]);
-    } else {
-        lmpColor = d3.scale.quantize()
-            .domain([minLMP, minLMP / 2, 0, maxLMP / 2, maxLMP])
-            .range(["#1a9641", "#a6d96a", "#ffffbf", "#fdae61", "#d7191c"]);
-    }
-    return lmpColor;
-}
+var lmpDomain = [
+    -10, 0, 20, 40, 70,
+    100, 150, 200, 500
+];
+var lmpRange = [
+    '#6a128d', '#191f71', '#4deffe', '#40ffa0', '#89bd47',
+    '#edff12', '#f6e212', '#f8b812', '#f78d12', '#f61f12'
+];
+var lmpColor = d3.scale.threshold()
+    .domain( lmpDomain )
+    .range( lmpRange );
 
 function addPowerline( key, link ) {
     var source = this.nodes[link.source];
@@ -148,7 +146,6 @@ function loadData() {
         var lmps = Object.keys(buses).map(function (key) { return parseFloat(buses[key].minute_lmp); });
         var minLMP = d3.min( lmps );
         var maxLMP = d3.max( lmps );
-        var lmpColor = lmpColorGen( minLMP, maxLMP );
 
         $.each( graph.links, addPowerline.bind({nodes: nodes}) );
         $.each( pjm.transfer, addTransferInterface.bind({interfaces: interfaces}) );
