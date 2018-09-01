@@ -2,13 +2,41 @@ body {
     padding: 0;
     margin: 0;
 }
-html, body, #map {
+pre {
+    margin: 0;
+}
+html, body, #wrapper {
     height: 100%;
     width: 100%;
+}
+#wrapper {
+    display: flex;
+}
+#map {
+    flex: 0 0 70%;
+}
+#side-panel {
+    flex: 1;
+    padding: 5px;
+}
+.header {
+    margin-bottom: 0.2em;
+}
+.contents {
+    margin-bottom: 1em;
+}
+#load table {
+    width: 100%;
+}
+#load th {
+    text-align: left;
 }
 .control-text {
     background: #fff;
     border: 2px solid rgba(0,0,0,0.2);
     padding: 0 5px;
+}
+.header {
+    font-size: 120%;
 }
 

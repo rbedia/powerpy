@@ -10,7 +10,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var powerMap = L.tileLayer('http://power.doxu.org/osm_tiles/{z}/{x}/{y}.png', {
+// var powerTileUrl = 'http://power.doxu.org/osm_tiles/{z}/{x}/{y}.png';
+var powerTileUrl = 'http://aqua.trillinux.org:8112/osm_tiles/{z}/{x}/{y}.png';
+var powerMap = L.tileLayer(powerTileUrl, {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
@@ -114,6 +116,39 @@ function createLastUpdatedControl( pjm ) {
     });
 }
 
+function showLimits( limits ) {
+    limits = limits.replace( /(\t| {4})/g, "" );
+    limits = limits.replace( "\nContingency\n", "" );
+    if (!limits.trim()) {
+        limits = "No contingencies.";
+    }
+    var html = "<pre>" + limits + "</pre>";
+    $( "#limits" ).html( html );
+}
+
+function showLoad( load ) {
+    var table = $( '<table/>' );
+    var tbody = $( '<tbody/>' );
+    var tr = $( '<tr/>' );
+    var th = $( '<th/>' );
+    var td = $( '<td/>' );
+    var header = tr.clone();
+
+    header.append( th.clone().text( "Area" ) );
+    header.append( th.clone().text( "Load" ) );
+    table.append( $( '<thead></thead>' ).append( header ) );
+
+    $.each( load, function( key, d ) {
+        var row = tr.clone();
+        var area = d.area.replace( ' REGION', '' );
+        var regionalLoad = d.load + ' MW';
+        row.append( td.clone().text( area ) );
+        row.append( td.clone().text( regionalLoad ) );
+        tbody.append( row );
+    });
+    $( "#load" ).append( table.append( tbody ) );
+}
+
 var lastUpdatedControl;
 var legendControl;
 
@@ -154,6 +189,9 @@ function loadData() {
         legendControl = createLegend( lmpColor );
         map.addControl( legendControl );
 
+        showLimits( pjm.limits );
+        showLoad( pjm.load );
+
     });
 }
 
@@ -161,12 +199,4 @@ loadData();
 
 var updateIntervalSec = 5 * 60;
 setInterval(loadData, updateIntervalSec * 1000 );
-
-/*
-$.getJSON( "/limits", function( data ) {
-    console.log(data.limits);
-    var html = "<pre>" + data.limits + "</pre>";
-
-});
-*/
 
