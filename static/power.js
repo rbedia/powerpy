@@ -146,7 +146,7 @@ function showLoad( load ) {
         row.append( td.clone().text( regionalLoad ) );
         tbody.append( row );
     });
-    $( "#load" ).append( table.append( tbody ) );
+    $( "#load" ).html( table.append( tbody ) );
 }
 
 var lastUpdatedControl;
