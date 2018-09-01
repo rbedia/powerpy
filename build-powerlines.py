@@ -15,6 +15,7 @@ for filename in sorted(glob.glob('/app/powerlines/*.json')):
     addition = json.load(open(filename))
     doc = merger.merge(doc, addition)
 
-with open('/app/static/powerlines.json', 'w') as out:
+os.mkdir('/app/data')
+with open('/app/data/powerlines.json', 'w') as out:
     json.dump(doc, out)
 

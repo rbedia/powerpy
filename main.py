@@ -7,9 +7,13 @@ import query
 DEBUG = False
 app_root = '/app'
 static_root = app_root + '/static'
+data_root = app_root + '/data'
 
 def powerpy_static(path):
     return static_file(path, root=static_root)
+
+def powerpy_data(path):
+    return static_file(path, root=data_root)
 
 @route('/static/<path:path>')
 def static(path):
@@ -29,7 +33,7 @@ def pjm():
 
 @route('/powerlines.json')
 def lines():
-    return powerpy_static('powerlines.json')
+    return powerpy_data('powerlines.json')
 
 @route('/transfer')
 def transfer():
