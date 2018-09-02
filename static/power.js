@@ -4,7 +4,7 @@ var startingZoom = 6;
 var map = L.map('map', {editInOSMControlOptions: {position: "bottomleft"}
         }).setView(startingCoord, startingZoom);
 
-var voltColor = d3.scale.category10();
+var voltColor = d3.scaleOrdinal(d3.schemeCategory10);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -23,7 +23,7 @@ var linesGroup = L.featureGroup().addTo(map);
 var interfacesGroup = L.featureGroup().addTo(map);
 
 var interfaceColorRange = ['#fef0d9','#fdcc8a','#fc8d59','#e34a33','#b30000'];
-var interfaceColor = d3.scale.quantize()
+var interfaceColor = d3.scaleQuantize()
 	.domain([0, 100])
 	.range(interfaceColorRange);
 
@@ -37,7 +37,7 @@ var lmpRange = [
     '#6a128d', '#191f71', '#4deffe', '#40ffa0', '#89bd47',
     '#edff12', '#f6e212', '#f8b812', '#f78d12', '#f61f12'
 ];
-var lmpColor = d3.scale.threshold()
+var lmpColor = d3.scaleThreshold()
     .domain( lmpDomain )
     .range( lmpRange );
 
