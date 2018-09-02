@@ -23,7 +23,9 @@ html, body, #wrapper {
     margin-bottom: 0.2em;
 }
 .contents {
+    padding-bottom: 0.2em;
     margin-bottom: 1em;
+    border-bottom: 1px solid #aaa;
 }
 #load table {
     width: 100%;
