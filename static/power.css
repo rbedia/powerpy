@@ -13,7 +13,7 @@ html, body, #wrapper {
     display: flex;
 }
 #map {
-    flex: 0 0 70%;
+    flex: 0 0 65%;
 }
 #side-panel {
     flex: 1;

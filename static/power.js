@@ -149,6 +149,51 @@ function showLoad( load ) {
     $( "#load" ).html( table.append( tbody ) );
 }
 
+function showLoadChart() {
+    var hours = 7 * 24;
+
+    $.when(
+        $.getJSON( "/history/load/" + hours ) 
+    ).done( function( history ) {
+        var columns = history.columns;
+
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                x: 'x',
+                xFormat: '%Y-%m-%d %H:%M:%S',
+                columns: columns
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        culling: {
+                            max: 4
+                        },
+                        count: 7 * 4,
+                        format: '%Y-%m-%d %H:%M'
+                    }
+                },
+                y: {
+                    label: 'MW'
+                }
+            },
+            grid: {
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
+            },
+            zoom: {
+                enabled: true
+            }
+        });
+    });
+}
+
 var lastUpdatedControl;
 var legendControl;
 
@@ -193,6 +238,8 @@ function loadData() {
         showLoad( pjm.load );
 
     });
+
+    showLoadChart();
 }
 
 loadData();

@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/static/vendor/leaflet-editinosm-0.2.3/Leaflet.EditInOSM.min.css">
     <link rel="stylesheet" href="/static/vendor/leaflet-html-legend-0.2.2/L.Control.HtmlLegend.min.css">
+    <link rel="stylesheet" href="/static/vendor/c3-0.6.7/c3.min.css">
     <link rel="stylesheet" href="/static/power.css">
 </head>
 <body>
@@ -15,6 +16,7 @@
         <div id="map"></div>
         <div id="side-panel">
             <div class="header" id="load-header">Regional Load</div>
+            <div class="chart" id="chart"></div>
             <div class="contents" id="load"></div>
             <div class="header" id="limits-header">Contingencies</div>
             <div class="contents" id="limits"></div>
@@ -28,6 +30,7 @@
       crossorigin=""></script>
     <script src="/static/vendor/jquery-3.2.1.min.js"></script>
     <script src="/static/vendor/d3-5.7.0/d3.min.js"></script>
+    <script src="/static/vendor/c3-0.6.7/c3.min.js"></script>
     <script src="/static/vendor/leaflet-editinosm-0.2.3/Leaflet.EditInOSM.min.js"></script>
     <script src="/static/vendor/leaflet-html-legend-0.2.2/L.Control.HtmlLegend.js"></script>
     <script src="/static/control-text.js"></script>
