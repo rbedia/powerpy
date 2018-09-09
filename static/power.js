@@ -118,7 +118,6 @@ function createLastUpdatedControl( pjm ) {
 
 function showLimits( limits ) {
     limits = limits.replace( /(\t| {4})/g, "" );
-    limits = limits.replace( "\nContingency\n", "" );
     if (!limits.trim()) {
         limits = "No contingencies.";
     }
