@@ -517,7 +517,7 @@
     {"name": "Maine Yankee", "state": "ME", "lat": 43.9535905, "lon": -69.6955631, "index": 513},
     {"name": "Orrington", "state": "ME", "lat": 44.74021265, "lon": -68.75409565, "index": 514},
     {"name": "Chester", "state": "ME", "lat": 45.3974546, "lon": -68.52942245, "index": 515},
-    {"name": "Keswick", "state": "CA", "lat": 46.05677774, "lon": -66.84997405, "index": 516},
+    {"name": "Keswick", "state": "NB", "lat": 46.05677774, "lon": -66.84997405, "index": 516},
     {"name": "Newington", "state": "NH", "lat": 43.0981174, "lon": -70.7924897, "index": 517},
     {"name": "Timber Swamp", "state": "NH", "lat": 42.9496953, "lon": -70.86900135, "index": 518},
     {"name": "Seabrook", "state": "NH", "lat": 42.90065565, "lon": -70.8539773, "index": 519},
