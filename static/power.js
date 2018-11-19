@@ -243,6 +243,8 @@ function loadData() {
 
 loadData();
 
+/*
+XXX Disable automatic updates until a solution is found to disable them when focus is lost.
 var updateIntervalSec = 5 * 60;
 setInterval(loadData, updateIntervalSec * 1000 );
-
+*/
