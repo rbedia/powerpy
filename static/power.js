@@ -15,7 +15,7 @@ var powerMap = L.tileLayer(powerTileUrl, {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-powerMap.opacity = 0.7;
+powerMap.opacity = 1.0;
 
 var subsGroup = L.featureGroup().addTo(map);
 var linesGroup = L.featureGroup().addTo(map);
