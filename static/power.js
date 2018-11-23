@@ -3,6 +3,7 @@ var startingZoom = 6;
 
 var map = L.map('map', {editInOSMControlOptions: {position: "bottomleft"}
         }).setView(startingCoord, startingZoom);
+map.addHash();
 
 var voltColor = d3.scaleOrdinal(d3.schemeCategory10);
 
