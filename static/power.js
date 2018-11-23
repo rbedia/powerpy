@@ -10,8 +10,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// var powerTileUrl = 'http://power.doxu.org/osm_tiles/{z}/{x}/{y}.png';
-var powerTileUrl = 'http://aqua.trillinux.org:8112/osm_tiles/{z}/{x}/{y}.png';
+var powerTileUrl = 'http://power.doxu.org/osm_tiles/{z}/{x}/{y}.png';
 var powerMap = L.tileLayer(powerTileUrl, {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
