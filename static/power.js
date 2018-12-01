@@ -12,11 +12,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var powerTileUrl = 'http://power.doxu.org/osm_tiles/power/{z}/{x}/{y}.png';
-var powerMap = L.tileLayer(powerTileUrl, {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-powerMap.opacity = 1.0;
+var powerMap = L.tileLayer(powerTileUrl).addTo(map);
 
 var subsGroup = L.featureGroup().addTo(map);
 var linesGroup = L.featureGroup().addTo(map);
