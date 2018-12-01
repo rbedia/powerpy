@@ -75,6 +75,10 @@ def history_load(hours):
 def index():
     return powerpy_static('index.html')
 
+@route('/error')
+def error():
+    return powerpy_static('error.html')
+
 if DEBUG:
     bottle.debug(True)
 
