@@ -1026,7 +1026,7 @@
     {"name": "Penhook", "state": "VA", "lat": 36.97879485, "lon": -79.61669585, "index": 1022},
     {"name": "Smith Mountain", "state": "VA", "lat": 37.04024955, "lon": -79.53245335, "index": 1023},
     {"name": "Moneta", "state": "VA", "lat": 37.19522345, "lon": -79.61747565, "index": 1024},
-    {"name": "Rockcast", "state": "VA", "lat": 37.2552889, "lon": -79.69219565, "index": 1025},
+    {"name": "Unknown VA 1", "state": "VA", "lat": 37.2552889, "lon": -79.69219565, "index": 1025},
     {"name": "Hazel Hollow", "state": "VA", "lat": 37.11415685, "lon": -80.61454094, "index": 1026},
     {"name": "Ingles Street", "state": "VA", "lat": 37.11705045, "lon": -80.59246035, "index": 1027},
     {"name": "Morgans", "state": "VA", "lat": 37.130115, "lon": -80.6262595, "index": 1028},
@@ -1070,8 +1070,8 @@
     {"name": "Reusens", "state": "VA", "lat": 37.46229155, "lon": -79.1892704, "index": 1066},
     {"name": "Lake Forest", "state": "VA", "lat": 37.37838085, "lon": -79.84739435, "index": 1067},
     {"name": "Coffee", "state": "VA", "lat": 37.42577724, "lon": -79.29096835, "index": 1068},
-    {"name": "Unknown VA 1", "state": "VA", "lat": 37.3745975, "lon": -79.502136, "index": 1069},
-    {"name": "Unknown VA 2", "state": "VA", "lat": 37.35227865, "lon": -79.5658971, "index": 1070},
+    {"name": "Centerville", "state": "VA", "lat": 37.3745975, "lon": -79.502136, "index": 1069},
+    {"name": "Moseley", "state": "VA", "lat": 37.35227865, "lon": -79.5658971, "index": 1070},
     {"name": "Brush Tavern", "state": "VA", "lat": 37.3230257, "lon": -79.25859445, "index": 1071},
     {"name": "Peaks View", "state": "VA", "lat": 37.3893719, "lon": -79.12223795, "index": 1072},
     {"name": "Lynbrook", "state": "VA", "lat": 37.29989625, "lon": -79.21498944, "index": 1073},
@@ -1129,7 +1129,10 @@
     {"name": "White Oak", "state": "VA", "lat": 37.4860739, "lon": -77.24717304, "index": 1125},
     {"name": "Poe", "state": "VA", "lat": 37.19998875, "lon": -77.35910165, "index": 1126},
     {"name": "Hopewell", "state": "VA", "lat": 37.2898369, "lon": -77.28266, "index": 1127},
-    {"name": "Prince George", "state": "VA", "lat": 37.25624315, "lon": -77.2950364, "index": 1128}
+    {"name": "Prince George", "state": "VA", "lat": 37.25624315, "lon": -77.2950364, "index": 1128},
+    {"name": "Rockcastle", "state": "VA", "lat": 37.1320594, "lon": -79.5714996, "index": 1129},
+    {"name": "Whitehouse", "state": "VA", "lat": 37.12849305, "lon": -79.59169094, "index": 1130},
+    {"name": "Lone Gum", "state": "VA", "lat": 37.1794586, "lon": -79.4310898, "index": 1131}
   ]
 }
 
