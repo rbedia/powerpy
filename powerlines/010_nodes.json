@@ -1132,7 +1132,8 @@
     {"name": "Prince George", "state": "VA", "lat": 37.25624315, "lon": -77.2950364, "index": 1128},
     {"name": "Rockcastle", "state": "VA", "lat": 37.1320594, "lon": -79.5714996, "index": 1129},
     {"name": "Whitehouse", "state": "VA", "lat": 37.12849305, "lon": -79.59169094, "index": 1130},
-    {"name": "Lone Gum", "state": "VA", "lat": 37.1794586, "lon": -79.4310898, "index": 1131}
+    {"name": "Lone Gum", "state": "VA", "lat": 37.1794586, "lon": -79.4310898, "index": 1131},
+    {"name": "Rustburg", "state": "VA", "lat": 37.2771525, "lon": -79.10630334, "index": 1132}
   ]
 }
 

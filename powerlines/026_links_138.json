@@ -98,6 +98,7 @@
     {"source": 1060, "target": 1064, "voltage": 138,  "length": 3},
     {"source": 1060, "target": 1071, "voltage": 138,  "length": 3},
     {"source": 1061, "target": 1062, "voltage": 138,  "length": 4},
+    {"source": 1061, "target": 1132, "voltage": 138,  "length": 5},
     {"source": 1062, "target": 1063, "voltage": 138,  "length": 3},
     {"source": 1062, "target": 1072, "voltage": 138,  "length": 1},
     {"source": 1062, "target": 1075, "voltage": 138,  "length": 4},
